@@ -15,47 +15,48 @@
   header {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: white;
-    padding: 24px 20px 20px;
+    padding: 20px 16px 16px;
     text-align: center;
   }
-  header h1 { font-size: 22px; font-weight: 700; }
-  header p { font-size: 12px; opacity: 0.5; margin-top: 6px; }
+  header h1 { font-size: 20px; font-weight: 700; }
+  header p { font-size: 11px; opacity: 0.5; margin-top: 4px; }
 
   .cards {
     display: flex;
-    gap: 12px;
-    margin: 20px 16px;
+    gap: 10px;
+    margin: 16px 12px;
   }
   .card {
     flex: 1;
-    border-radius: 14px;
-    padding: 18px 14px;
+    border-radius: 12px;
+    padding: 14px 10px;
     text-align: center;
     color: white;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   }
   .card.debt { background: linear-gradient(135deg, #e74c3c, #c0392b); }
   .card.tel  { background: linear-gradient(135deg, #e67e22, #d35400); }
-  .card .label { font-size: 11px; opacity: 0.85; text-transform: uppercase; letter-spacing: 1px; }
-  .card .amount { font-size: 24px; font-weight: 800; margin-top: 6px; }
+  .card .label { font-size: 10px; opacity: 0.85; text-transform: uppercase; letter-spacing: 1px; }
+  .card .amount { font-size: 20px; font-weight: 800; margin-top: 4px; white-space: nowrap; }
 
   .table-wrap {
-    margin: 0 16px 24px;
+    margin: 0 12px 20px;
     background: white;
-    border-radius: 16px;
-    overflow: hidden;
+    border-radius: 14px;
+    overflow-x: auto;
     box-shadow: 0 2px 16px rgba(0,0,0,0.08);
   }
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 13px;
+    font-size: 12px;
+    white-space: nowrap;
   }
   th {
     background: #f8f9fa;
-    padding: 9px 12px;
+    padding: 8px 10px;
     text-align: right;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     color: #999;
     text-transform: uppercase;
@@ -66,12 +67,13 @@
   th:first-child { text-align: left; }
   th:last-child { border-right: none; }
   td {
-    padding: 11px 12px;
+    padding: 10px 10px;
     text-align: right;
     border-bottom: 1px solid #f0f0f0;
     border-right: 1px solid #f0f0f0;
+    white-space: nowrap;
   }
-  td:first-child { text-align: left; font-size: 12px; color: #888; }
+  td:first-child { text-align: left; color: #888; }
   td:last-child { border-right: none; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafafa; }
@@ -87,17 +89,17 @@
 
 <header>
   <h1>Взаиморасчёты</h1>
-  <p>Обновлено: 16.06.2026 21:54</p>
+  <p>Обновлено: 17.06.2026 08:32</p>
 </header>
 
 <div class="cards">
   <div class="card debt">
     <div class="label">Касса</div>
-    <div class="amount">91 570 ₽</div>
+    <div class="amount">91 570 ₽</div>
   </div>
   <div class="card tel">
     <div class="label">Телефон</div>
-    <div class="amount">57 822 ₽</div>
+    <div class="amount">57 822 ₽</div>
   </div>
 </div>
 
@@ -113,8 +115,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td>16 июн 2026</td><td><span class="sale">89 550 ₽</span></td><td><span class="muted">—</span></td><td><span class="red">91 570 ₽</span></td><td><span class="orange">57 822 ₽</span></td></tr>
-      <tr><td>15 июн 2026</td><td><span class="muted">—</span></td><td><span class="green">105 100 ₽</span></td><td><span class="red">2 020 ₽</span></td><td><span class="orange">57 822 ₽</span></td></tr>
+      <tr><td>16 июн</td><td><span class="sale">89 550₽</span></td><td><span class="muted">—</span></td><td><span class="red">91 570₽</span></td><td><span class="orange">57 822₽</span></td></tr>
+      <tr><td>15 июн</td><td><span class="muted">—</span></td><td><span class="green">105 100₽</span></td><td><span class="red">2 020₽</span></td><td><span class="orange">57 822₽</span></td></tr>
     </tbody>
   </table>
 </div>
