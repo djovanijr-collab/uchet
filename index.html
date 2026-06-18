@@ -72,24 +72,36 @@
     white-space: nowrap;
     vertical-align: middle;
   }
-  td:first-child { text-align: left; color: #444; font-weight: 600; white-space: normal; line-height: 1.4; }
+  td.date-cell {
+    text-align: left;
+    color: #444;
+    font-weight: 600;
+    white-space: normal;
+    line-height: 1.4;
+    border-bottom: 2px solid #9aa0ab;
+    border-right: 2px solid #9aa0ab;
+  }
+  td.sale-cell {
+    border-bottom: 2px solid #9aa0ab;
+    border-right: 2px solid #9aa0ab;
+  }
+  tr.sub-row td { border-bottom: 1px dashed #c9ccd1; }
+  tr.last-row td { border-bottom: 2px solid #9aa0ab; }
+  tr:last-child td { border-bottom: none !important; }
   td:last-child { border-right: none; }
-  .day-row td { border-bottom: 2px solid #9aa0ab; }
-  .sub-row td { border-bottom: 1px dashed #c0c4cc; }
-  .sub-row:last-child td { border-bottom: 2px solid #9aa0ab; }
   tr:hover td { background: #fafafa; }
   .sale   { color: #2c3e50; font-weight: 600; }
   .green  { color: #27ae60; font-weight: 600; }
   .red    { color: #e74c3c; font-weight: 700; }
   .orange { color: #e67e22; font-weight: 700; }
   .muted  { color: #ccc; }
-  .sub-note { display:block; font-size: 10px; color: #999; font-weight: 400; margin-top: 2px; }
+  .sub-note { display:block; font-size: 10px; color: #999; font-weight: 400; margin-top: 2px; white-space: nowrap; }
 </style>
 </head>
 <body>
 <header>
   <h1>Взаиморасчёты</h1>
-  <p>Обновлено: 18.06.2026 18:57</p>
+  <p>Обновлено: 18.06.2026 20:44</p>
 </header>
 <div class="cards">
   <div class="card debt">
@@ -113,12 +125,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="sub-row"><td>18 июня<br>2026</td><td><span class="sale">27 100₽</span></td><td><span class="green">42 000₽</span><span class="sub-note">из них 14 130₽ → тел</span></td><td><span class="green">0₽</span></td><td><span class="orange">43 692₽</span></td></tr>
-      <tr class="day-row"><td></td><td><span class="muted">—</span></td><td><span class="green">25 000₽</span><span class="sub-note">из них 25 000₽ → тел</span></td><td><span class="green">0₽</span></td><td><span class="orange">18 692₽</span></td></tr>
-      <tr class="sub-row"><td>17 июня<br>2026</td><td><span class="muted">—</span></td><td><span class="green">90 000₽</span></td><td><span class="red">1 570₽</span></td><td><span class="orange">57 822₽</span></td></tr>
-      <tr class="day-row"><td></td><td><span class="muted">—</span></td><td><span class="green">800₽</span></td><td><span class="red">770₽</span></td><td><span class="orange">57 822₽</span></td></tr>
-      <tr class="day-row"><td>16 июня<br>2026</td><td><span class="sale">89 550₽</span></td><td><span class="muted">—</span></td><td><span class="red">91 570₽</span></td><td><span class="orange">57 822₽</span></td></tr>
-      <tr class="day-row"><td>15 июня<br>2026</td><td><span class="muted">—</span></td><td><span class="green">105 100₽</span></td><td><span class="red">2 020₽</span></td><td><span class="orange">57 822₽</span></td></tr>
+      <tr class="sub-row"><td class="date-cell" rowspan="2">18 июня<br>2026</td><td class="sale-cell" rowspan="2"><span class="sale">27 100₽</span></td><td><span class="green">42 000₽</span><span class="sub-note">из них 14 130₽ → тел</span></td><td><span class="green">0₽</span></td><td><span class="orange">43 692₽</span></td></tr>
+      <tr class="last-row"><td><span class="green">25 000₽</span><span class="sub-note">из них 25 000₽ → тел</span></td><td><span class="green">0₽</span></td><td><span class="orange">18 692₽</span></td></tr>
+      <tr class="sub-row"><td class="date-cell" rowspan="2">17 июня<br>2026</td><td class="sale-cell" rowspan="2"><span class="muted">—</span></td><td><span class="green">90 000₽</span></td><td><span class="red">1 570₽</span></td><td><span class="orange">57 822₽</span></td></tr>
+      <tr class="last-row"><td><span class="green">800₽</span></td><td><span class="red">770₽</span></td><td><span class="orange">57 822₽</span></td></tr>
+      <tr class="last-row"><td class="date-cell" rowspan="1">16 июня<br>2026</td><td class="sale-cell" rowspan="1"><span class="sale">89 550₽</span></td><td><span class="muted">—</span></td><td><span class="red">91 570₽</span></td><td><span class="orange">57 822₽</span></td></tr>
+      <tr class="last-row"><td class="date-cell" rowspan="1">15 июня<br>2026</td><td class="sale-cell" rowspan="1"><span class="muted">—</span></td><td><span class="green">105 100₽</span></td><td><span class="red">2 020₽</span></td><td><span class="orange">57 822₽</span></td></tr>
     </tbody>
   </table>
 </div>
