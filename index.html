@@ -6,77 +6,25 @@
 <title>Взаиморасчёты</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #f0f2f5;
-    color: #1a1a2e;
-    min-height: 100vh;
-  }
-  header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    color: white;
-    padding: 20px 16px 16px;
-    text-align: center;
-  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
+  header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 20px 16px 16px; text-align: center; }
   header h1 { font-size: 20px; font-weight: 700; }
   header p { font-size: 11px; opacity: 0.5; margin-top: 4px; }
-  .cards {
-    display: flex;
-    gap: 10px;
-    margin: 16px 12px;
-  }
-  .card {
-    flex: 1;
-    border-radius: 12px;
-    padding: 14px 10px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  }
+  .cards { display: flex; gap: 10px; margin: 16px 12px; }
+  .card { flex: 1; border-radius: 12px; padding: 14px 10px; text-align: center; color: white; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
   .card.debt { background: linear-gradient(135deg, #e74c3c, #c0392b); }
   .card.tel  { background: linear-gradient(135deg, #e67e22, #d35400); }
   .card .label { font-size: 10px; opacity: 0.85; text-transform: uppercase; letter-spacing: 1px; }
   .card .amount { font-size: 20px; font-weight: 800; margin-top: 4px; white-space: nowrap; }
-  .table-wrap {
-    margin: 0 12px 20px;
-    background: white;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-    border: 2px solid #9aa0ab;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-  }
-  th {
-    background: #e2e5ea;
-    padding: 9px 10px;
-    text-align: right;
-    font-size: 11px;
-    font-weight: 800;
-    color: #44485a;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    border-bottom: 2px solid #9aa0ab;
-    border-right: 2px solid #9aa0ab;
-    white-space: nowrap;
-  }
+  .table-wrap { margin: 0 12px 20px; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.08); border: 2px solid #9aa0ab; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { background: #e2e5ea; padding: 9px 10px; text-align: right; font-size: 11px; font-weight: 800; color: #44485a; text-transform: uppercase; letter-spacing: 0.6px; border-bottom: 2px solid #9aa0ab; border-right: 2px solid #9aa0ab; white-space: nowrap; }
   th:first-child { text-align: left; }
   th:last-child { border-right: none; }
-  td {
-    padding: 9px 10px;
-    text-align: right;
-    border-right: 2px solid #9aa0ab;
-    border-bottom: 1px dashed #c9ccd1;
-    white-space: nowrap;
-    vertical-align: middle;
-  }
-  td:first-child { text-align: left; }
+  td { padding: 9px 10px; text-align: right; border-right: 2px solid #9aa0ab; border-bottom: 2px solid #9aa0ab; white-space: nowrap; vertical-align: middle; }
+  td:first-child { text-align: left; white-space: normal; line-height: 1.4; }
   td:last-child { border-right: none; }
-  tr.day-end td { border-bottom: 2px solid #9aa0ab; }
-  tbody tr:last-child td { border-bottom: none !important; }
+  tbody tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafafa; }
   .sale   { color: #2c3e50; font-weight: 600; }
   .green  { color: #27ae60; font-weight: 600; }
@@ -84,42 +32,28 @@
   .orange { color: #e67e22; font-weight: 700; }
   .muted  { color: #ccc; }
   .sub-note { display: block; font-size: 10px; color: #999; font-weight: 400; margin-top: 2px; white-space: nowrap; }
-  .date-cell { color: #444; font-weight: 600; white-space: normal; line-height: 1.4; }
+  .sub-line { border-top: 1px dashed #c9ccd1; padding-top: 6px; margin-top: 6px; }
 </style>
 </head>
 <body>
 <header>
   <h1>Взаиморасчёты</h1>
-  <p>Обновлено: 19.06.2026 05:57</p>
+  <p>Обновлено: 19.06.2026 06:02</p>
 </header>
 <div class="cards">
-  <div class="card debt">
-    <div class="label">Касса</div>
-    <div class="amount">0 ₽</div>
-  </div>
-  <div class="card tel">
-    <div class="label">Телефон</div>
-    <div class="amount">18 692 ₽</div>
-  </div>
+  <div class="card debt"><div class="label">Касса</div><div class="amount">0 ₽</div></div>
+  <div class="card tel"><div class="label">Телефон</div><div class="amount">18 692 ₽</div></div>
 </div>
 <div class="table-wrap">
   <table>
     <thead>
-      <tr>
-        <th>Дата</th>
-        <th>Продажа</th>
-        <th>Приход</th>
-        <th>Касса</th>
-        <th>Тел</th>
-      </tr>
+      <tr><th>Дата</th><th>Продажа</th><th>Приход</th><th>Касса</th><th>Тел</th></tr>
     </thead>
     <tbody>
-      <tr class=""><td class="date-cell">18 июня<br>2026</td><td><span class="sale">27 100₽</span></td><td><span class="green">25 000₽</span><span class="sub-note">из них 25 000₽ → тел</span></td><td><span class="green">0₽</span></td><td><span class="orange">18 692₽</span></td></tr>
-      <tr class="day-end"><td></td><td></td><td><span class="green">42 000₽</span><span class="sub-note">из них 14 130₽ → тел</span></td><td></td><td><span class="orange">43 692₽</span></td></tr>
-      <tr class=""><td class="date-cell">17 июня<br>2026</td><td><span class="muted">—</span></td><td><span class="green">800₽</span></td><td><span class="red">770₽</span></td><td><span class="orange">57 822₽</span></td></tr>
-      <tr class="day-end"><td></td><td></td><td><span class="green">90 000₽</span></td><td><span class="red">1 570₽</span></td><td></td></tr>
-      <tr class="day-end"><td class="date-cell">16 июня<br>2026</td><td><span class="sale">89 550₽</span></td><td><span class="muted">—</span></td><td><span class="red">91 570₽</span></td><td><span class="orange">57 822₽</span></td></tr>
-      <tr class="day-end"><td class="date-cell">15 июня<br>2026</td><td><span class="muted">—</span></td><td><span class="green">105 100₽</span></td><td><span class="red">2 020₽</span></td><td><span class="orange">57 822₽</span></td></tr>
+      <tr><td>18 июня<br>2026</td><td><span class="sale">27 100₽</span></td><td><div><span class="green">25 000₽</span><span class="sub-note">из них 25 000₽ → тел</span></div><div class="sub-line"><span class="green">42 000₽</span><span class="sub-note">из них 14 130₽ → тел</span></div></td><td><div><span class="green">0₽</span></div><div class="sub-line"></div></td><td><div><span class="orange">18 692₽</span></div><div class="sub-line"><span class="orange">43 692₽</span></div></td></tr>
+      <tr><td>17 июня<br>2026</td><td><span class="muted">—</span></td><td><div><span class="green">800₽</span></div><div class="sub-line"><span class="green">90 000₽</span></div></td><td><div><span class="red">770₽</span></div><div class="sub-line"><span class="red">1 570₽</span></div></td><td><div><span class="orange">57 822₽</span></div><div class="sub-line"></div></td></tr>
+      <tr><td>16 июня<br>2026</td><td><span class="sale">89 550₽</span></td><td><div><span class="muted">—</span></div></td><td><div><span class="red">91 570₽</span></div></td><td><div><span class="orange">57 822₽</span></div></td></tr>
+      <tr><td>15 июня<br>2026</td><td><span class="muted">—</span></td><td><div><span class="green">105 100₽</span></div></td><td><div><span class="red">2 020₽</span></div></td><td><div><span class="orange">57 822₽</span></div></td></tr>
     </tbody>
   </table>
 </div>
