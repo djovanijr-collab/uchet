@@ -7,15 +7,28 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
-  header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 20px 16px 16px; text-align: center; }
+  header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 20px 16px 0; text-align: center; }
   header h1 { font-size: 20px; font-weight: 700; }
-  header p { font-size: 11px; opacity: 0.5; margin-top: 4px; }
+  header p { font-size: 11px; opacity: 0.5; margin-top: 4px; margin-bottom: 16px; }
+
+  .tabs { display: flex; }
+  .tab {
+    flex: 1; text-align: center; padding: 12px 0; font-size: 13px; font-weight: 700;
+    color: rgba(255,255,255,0.5); cursor: pointer; border-bottom: 3px solid transparent;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .tab.active { color: white; border-bottom-color: #e67e22; }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
   .cards { display: flex; gap: 10px; margin: 16px 12px; }
   .card { flex: 1; border-radius: 12px; padding: 14px 10px; text-align: center; color: white; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
   .card.debt { background: linear-gradient(135deg, #e74c3c, #c0392b); }
   .card.tel  { background: linear-gradient(135deg, #e67e22, #d35400); }
   .card .label { font-size: 10px; opacity: 0.85; text-transform: uppercase; letter-spacing: 1px; }
   .card .amount { font-size: 20px; font-weight: 800; margin-top: 4px; white-space: nowrap; }
+
   .table-wrap { margin: 0 12px 20px; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.08); border: 2px solid #9aa0ab; }
   table { width: 100%; border-collapse: collapse; font-size: 12px; }
   th { background: #e2e5ea; padding: 9px 10px; text-align: center; font-size: 11px; font-weight: 800; color: #44485a; text-transform: uppercase; letter-spacing: 0.6px; border-bottom: 2px solid #9aa0ab; border-right: 2px solid #9aa0ab; white-space: nowrap; }
@@ -32,29 +45,199 @@
   .muted  { color: #ccc; }
   .sub-note { display: block; font-size: 10px; color: #999; font-weight: 400; margin-top: 2px; white-space: nowrap; }
   .sub-line { border-top: 1px dashed #c9ccd1; padding-top: 6px; margin-top: 6px; }
+
+  /* Склад */
+  .sklad-wrap { display: flex; margin: 16px 12px; gap: 0; min-height: 400px; }
+  .sklad-sidebar {
+    width: 130px; flex-shrink: 0; background: white; border-radius: 14px 0 0 14px;
+    border: 2px solid #9aa0ab; border-right: none; padding: 10px 0; overflow-y: auto;
+  }
+  .sklad-sidebar div {
+    padding: 11px 12px; font-size: 12px; color: #555; cursor: pointer; line-height: 1.3;
+    border-left: 3px solid transparent;
+  }
+  .sklad-sidebar div.cat-active {
+    background: #fdf0e4; color: #d35400; font-weight: 700; border-left-color: #e67e22;
+  }
+  .sklad-content {
+    flex: 1; background: white; border-radius: 0 14px 14px 0; border: 2px solid #9aa0ab;
+    padding: 14px; box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  }
+  .panel-title { font-size: 14px; font-weight: 700; color: #333; margin-bottom: 10px; }
+  .sklad-table-wrap { border: 2px solid #9aa0ab; border-radius: 10px; overflow: hidden; }
+  .sklad-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .sklad-table th { background: #e2e5ea; padding: 8px 10px; font-size: 10px; }
+  .sklad-table th:first-child { text-align: left; }
+  .sklad-table td { font-weight: 400; padding: 8px 10px; }
+  .sklad-table td:first-child { font-weight: 400; }
+  .hidden-col { margin-left: 8px; font-size: 10px; color: #c4c8cf; }
 </style>
 </head>
 <body>
 <header>
   <h1>Взаиморасчёты</h1>
-  <p>Обновлено: 19.06.2026 12:53</p>
+  <p>Обновлено: 19.06.2026 20:31</p>
+  <div class="tabs">
+    <div class="tab active" id="tab-uchet" onclick="showPage('uchet')">Взаиморасчёты</div>
+    <div class="tab" id="tab-sklad" onclick="showPage('sklad')">Склад</div>
+  </div>
 </header>
-<div class="cards">
-  <div class="card debt"><div class="label">Касса</div><div class="amount">0 ₽</div></div>
-  <div class="card tel"><div class="label">Телефон</div><div class="amount">18 692 ₽</div></div>
-</div>
-<div class="table-wrap">
-  <table>
-    <thead>
-      <tr><th>Дата</th><th>Продажа</th><th>Приход</th><th>Касса</th><th>Тел</th></tr>
-    </thead>
-    <tbody>
+
+<div class="page active" id="page-uchet">
+  <div class="cards">
+    <div class="card debt"><div class="label">Касса</div><div class="amount">0 ₽</div></div>
+    <div class="card tel"><div class="label">Телефон</div><div class="amount">18 692 ₽</div></div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Дата</th><th>Продажа</th><th>Приход</th><th>Касса</th><th>Тел</th></tr></thead>
+      <tbody>
       <tr><td>18 июня<br>2026</td><td><span class="sale">27 100₽</span></td><td><div><span class="green">25 000₽</span><span class="sub-note">из них 25 000₽ → тел</span></div><div class="sub-line"><span class="green">42 000₽</span><span class="sub-note">из них 14 130₽ → тел</span></div></td><td><div><span class="green">0₽</span></div></td><td><div><span class="orange">18 692₽</span></div><div class="sub-line"><span class="orange">43 692₽</span></div></td></tr>
       <tr><td>17 июня<br>2026</td><td><span class="muted">—</span></td><td><div><span class="green">800₽</span></div><div class="sub-line"><span class="green">90 000₽</span></div></td><td><div><span class="red">770₽</span></div><div class="sub-line"><span class="red">1 570₽</span></div></td><td><div><span class="orange">57 822₽</span></div></td></tr>
       <tr><td>16 июня<br>2026</td><td><span class="sale">89 550₽</span></td><td><div><span class="muted">—</span></div></td><td><div><span class="red">91 570₽</span></div></td><td><div><span class="orange">57 822₽</span></div></td></tr>
       <tr><td>15 июня<br>2026</td><td><span class="muted">—</span></td><td><div><span class="green">105 100₽</span></div></td><td><div><span class="red">2 020₽</span></div></td><td><div><span class="orange">57 822₽</span></div></td></tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<div class="page" id="page-sklad">
+  <div class="sklad-wrap">
+    <div class="sklad-sidebar" id="sklad-sidebar">
+<div class="cat-active" data-cat="0" onclick="selectCat(0)">Плунжерные пары</div>
+<div data-cat="1" onclick="selectCat(1)">Кулачковые шайбы</div>
+<div data-cat="2" onclick="selectCat(2)">Подкачки</div>
+<div data-cat="3" onclick="selectCat(3)">Распылители</div>
+    </div>
+    <div class="sklad-content">
+<div class="cat-panel" id="panel-0" style="display:block">
+  <div class="panel-title">Плунжерные пары</div>
+  <div class="sklad-table-wrap">
+    <table class="sklad-table">
+      <thead><tr><th>Наименование</th><th>Кол-во</th></tr></thead>
+      <tbody>
+<tr><td>124 пара</td><td>1 шт</td></tr>
+<tr><td>125 пара</td><td>1 шт</td></tr>
+<tr><td>127 пара</td><td>2 шт</td></tr>
+<tr><td>132 пара</td><td>2 шт</td></tr>
+<tr><td>133 пара</td><td>1 шт</td></tr>
+<tr><td>144 пара</td><td>2 шт</td></tr>
+<tr><td>148 пара</td><td>1 шт</td></tr>
+<tr><td>148 пара*</td><td>2 шт</td></tr>
+<tr><td>150 пара*</td><td>1 шт</td></tr>
+<tr><td>170 пара</td><td>4 шт</td></tr>
+<tr><td>4D56 пара</td><td>1 шт</td></tr>
+<tr><td>4D56 пара</td><td>1 шт</td></tr>
+<tr><td>4D56 пара</td><td>1 шт</td></tr>
+<tr><td>4JG2E</td><td>2 шт</td></tr>
+<tr><td>4JG2T</td><td>1 шт</td></tr>
+<tr><td>59 пара</td><td>2 шт</td></tr>
+<tr><td>685 пара</td><td>1 шт</td></tr>
+<tr><td>69 пара 0</td><td>1 шт</td></tr>
+<tr><td>69 пара 100</td><td>1 шт</td></tr>
+<tr><td>69 пара Atlas</td><td>2 шт</td></tr>
+<tr><td>69 пара*</td><td>2 шт</td></tr>
+<tr><td>Isuzu 4JB1 пара</td><td>1 шт</td></tr>
+<tr><td>TD27 пара</td><td>1 шт</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="cat-panel" id="panel-1" style="display:none">
+  <div class="panel-title">Кулачковые шайбы</div>
+  <div class="sklad-table-wrap">
+    <table class="sklad-table">
+      <thead><tr><th>Наименование</th><th>Кол-во</th></tr></thead>
+      <tbody>
+<tr><td>00 к.шайба</td><td>1 шт</td></tr>
+<tr><td>01 к.шайба</td><td>2 шт</td></tr>
+<tr><td>10 к.шайба*</td><td>1 шт</td></tr>
+<tr><td>11 к.шайба Zex</td><td>2 шт</td></tr>
+<tr><td>16 к.шайба</td><td>1 шт</td></tr>
+<tr><td>26 к.шайба</td><td>1 шт</td></tr>
+<tr><td>32 к.шайба</td><td>1 шт</td></tr>
+<tr><td>35 к.шайба</td><td>1 шт</td></tr>
+<tr><td>39 к.шайба</td><td>2 шт</td></tr>
+<tr><td>40 к.шайба</td><td>1 шт</td></tr>
+<tr><td>45 к.шайба</td><td>1 шт</td></tr>
+<tr><td>47 к.шайба</td><td>1 шт</td></tr>
+<tr><td>48 к.шайба</td><td>2 шт</td></tr>
+<tr><td>54 к.шайба</td><td>2 шт</td></tr>
+<tr><td>55 к.шайба</td><td>1 шт</td></tr>
+<tr><td>61 к.шайба</td><td>1 шт</td></tr>
+<tr><td>7 к.шайба</td><td>1 шт</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="cat-panel" id="panel-2" style="display:none">
+  <div class="panel-title">Подкачки</div>
+  <div class="sklad-table-wrap">
+    <table class="sklad-table">
+      <thead><tr><th>Наименование</th><th>Кол-во</th></tr></thead>
+      <tbody>
+<tr><td>Крышка ротора</td><td>4 шт</td></tr>
+<tr><td>Подкачка 17мм</td><td>1 шт</td></tr>
+<tr><td>Подкачка 20мм</td><td>4 шт<span class="hidden-col">+1</span></td></tr>
+<tr><td>Подкачка 20мм Bosch</td><td>1 шт</td></tr>
+<tr><td>Подкачка V4</td><td>1 шт</td></tr>
+<tr><td>Шайба скольжения</td><td>1 шт</td></tr>
+<tr><td>Шайба скольжения</td><td>4 шт</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="cat-panel" id="panel-3" style="display:none">
+  <div class="panel-title">Распылители</div>
+  <div class="sklad-table-wrap">
+    <table class="sklad-table">
+      <thead><tr><th>Наименование</th><th>Кол-во</th></tr></thead>
+      <tbody>
+<tr><td>112 распылители D</td><td>8 шт</td></tr>
+<tr><td>113 распылители D</td><td>12 шт</td></tr>
+<tr><td>121 распылители D</td><td>4 шт</td></tr>
+<tr><td>121 распылитель</td><td>4 шт</td></tr>
+<tr><td>129 распылитель</td><td>8 шт</td></tr>
+<tr><td>130 распылитель</td><td>4 шт</td></tr>
+<tr><td>135 распылители</td><td>8 шт</td></tr>
+<tr><td>32 распылитель</td><td>8 шт</td></tr>
+<tr><td>59 распылители</td><td>4 шт</td></tr>
+<tr><td>619 распылитель</td><td>20 шт<span class="hidden-col">+12</span></td></tr>
+<tr><td>639 распылители</td><td>6 шт</td></tr>
+<tr><td>681 распылители</td><td>4 шт</td></tr>
+<tr><td>684 распылители</td><td>6 шт</td></tr>
+<tr><td>684 распылители</td><td>6 шт</td></tr>
+<tr><td>704 распылители</td><td>4 шт</td></tr>
+<tr><td>715 распылители</td><td>4 шт</td></tr>
+<tr><td>724 распылители</td><td>6 шт</td></tr>
+<tr><td>77 распылители</td><td>6 шт</td></tr>
+<tr><td>77 распылители</td><td>6 шт</td></tr>
+<tr><td>789 распылители</td><td>2 шт</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(name) {
+  document.getElementById('page-uchet').classList.remove('active');
+  document.getElementById('page-sklad').classList.remove('active');
+  document.getElementById('tab-uchet').classList.remove('active');
+  document.getElementById('tab-sklad').classList.remove('active');
+  document.getElementById('page-' + name).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+function selectCat(idx) {
+  var panels = document.querySelectorAll('.cat-panel');
+  panels.forEach(function(p) { p.style.display = 'none'; });
+  document.getElementById('panel-' + idx).style.display = 'block';
+  var cats = document.querySelectorAll('#sklad-sidebar div');
+  cats.forEach(function(c) { c.classList.remove('cat-active'); });
+  document.querySelector('#sklad-sidebar div[data-cat="' + idx + '"]').classList.add('cat-active');
+}
+</script>
 </body>
 </html>
