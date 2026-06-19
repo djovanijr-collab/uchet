@@ -37,6 +37,7 @@
   .muted  { color: #ccc; }
   .sub-note { display: block; font-size: 10px; color: #999; font-weight: 400; margin-top: 2px; white-space: nowrap; }
   .sub-line { border-top: 1px dashed #c9ccd1; padding-top: 6px; margin-top: 6px; }
+
   .sklad-wrap { display: flex; margin: 16px 12px; gap: 0; min-height: 400px; }
   .sklad-sidebar { width: 130px; flex-shrink: 0; background: white; border-radius: 14px 0 0 14px; border: 2px solid #9aa0ab; border-right: none; padding: 10px 0; overflow-y: auto; }
   .sklad-sidebar div { padding: 11px 12px; font-size: 12px; color: #555; cursor: pointer; line-height: 1.3; border-left: 3px solid transparent; }
@@ -45,17 +46,18 @@
   .panel-title { font-size: 14px; font-weight: 700; color: #333; margin-bottom: 10px; }
   .sklad-table-wrap { border: 2px solid #9aa0ab; border-radius: 10px; overflow: hidden; }
   .sklad-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  .sklad-table th { background: #e2e5ea; padding: 8px 10px; font-size: 10px; }
-  .sklad-table th:first-child { text-align: left; }
-  .sklad-table td { font-weight: 400; padding: 8px 10px; }
-  .sklad-table td:first-child { font-weight: 400; }
-  .hidden-col { margin-left: 8px; font-size: 10px; color: #c4c8cf; }
+  .sklad-table th { background: #e2e5ea; padding: 8px 6px; font-size: 10px; text-align: center; }
+  .sklad-table th.th-name { text-align: left; padding-left: 10px; }
+  .sklad-table td { font-weight: 400; padding: 8px 6px; text-align: center; }
+  .sklad-table td:first-child { font-weight: 400; text-align: left; padding-left: 10px; }
+  .qty-main { width: 50%; }
+  .qty-hidden { width: 50%; font-size: 10px; color: #c4c8cf; }
 </style>
 </head>
 <body>
 <header>
   <h1>Взаиморасчёты</h1>
-  <p>Обновлено: 19.06.2026 20:35</p>
+  <p>Обновлено: 19.06.2026 20:39</p>
   <div class="tabs">
     <div class="tab active" id="tab-uchet" onclick="showPage('uchet')">Взаиморасчёты</div>
     <div class="tab" id="tab-sklad" onclick="showPage('sklad')">Склад</div>
@@ -93,31 +95,31 @@
   <div class="panel-title">Плунжерные пары</div>
   <div class="sklad-table-wrap">
     <table class="sklad-table">
-      <thead><tr><th>Наименование</th><th>Кол-во</th></tr></thead>
+      <thead><tr><th class="th-name">Наименование</th><th colspan="2">Количество</th></tr></thead>
       <tbody>
-<tr><td>124 пара</td><td>1 шт</td></tr>
-<tr><td>125 пара</td><td>1 шт</td></tr>
-<tr><td>127 пара</td><td>2 шт</td></tr>
-<tr><td>132 пара</td><td>2 шт</td></tr>
-<tr><td>133 пара</td><td>1 шт</td></tr>
-<tr><td>144 пара</td><td>2 шт</td></tr>
-<tr><td>148 пара</td><td>1 шт</td></tr>
-<tr><td>148 пара*</td><td>2 шт</td></tr>
-<tr><td>150 пара*</td><td>1 шт</td></tr>
-<tr><td>170 пара</td><td>4 шт</td></tr>
-<tr><td>4D56 пара</td><td>1 шт</td></tr>
-<tr><td>4D56 пара</td><td>1 шт</td></tr>
-<tr><td>4D56 пара</td><td>1 шт</td></tr>
-<tr><td>4JG2E</td><td>2 шт</td></tr>
-<tr><td>4JG2T</td><td>1 шт</td></tr>
-<tr><td>59 пара</td><td>2 шт</td></tr>
-<tr><td>685 пара</td><td>1 шт</td></tr>
-<tr><td>69 пара 0</td><td>1 шт</td></tr>
-<tr><td>69 пара 100</td><td>1 шт</td></tr>
-<tr><td>69 пара Atlas</td><td>2 шт</td></tr>
-<tr><td>69 пара*</td><td>2 шт</td></tr>
-<tr><td>Isuzu 4JB1 пара</td><td>1 шт</td></tr>
-<tr><td>TD27 пара</td><td>1 шт</td></tr>
+<tr><td>124 пара</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>125 пара</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>127 пара</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>132 пара</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>133 пара</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>144 пара</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>148 пара</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>148 пара*</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>150 пара*</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>170 пара</td><td class="qty-main">4 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>4D56 пара</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>4D56 пара</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>4D56 пара</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>4JG2E</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>4JG2T</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>59 пара</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>685 пара</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>69 пара 0</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>69 пара 100</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>69 пара Atlas</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>69 пара*</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>Isuzu 4JB1 пара</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>TD27 пара</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
       </tbody>
     </table>
   </div>
@@ -126,25 +128,25 @@
   <div class="panel-title">Кулачковые шайбы</div>
   <div class="sklad-table-wrap">
     <table class="sklad-table">
-      <thead><tr><th>Наименование</th><th>Кол-во</th></tr></thead>
+      <thead><tr><th class="th-name">Наименование</th><th colspan="2">Количество</th></tr></thead>
       <tbody>
-<tr><td>00 к.шайба</td><td>1 шт</td></tr>
-<tr><td>01 к.шайба</td><td>2 шт</td></tr>
-<tr><td>10 к.шайба*</td><td>1 шт</td></tr>
-<tr><td>11 к.шайба Zex</td><td>2 шт</td></tr>
-<tr><td>16 к.шайба</td><td>1 шт</td></tr>
-<tr><td>26 к.шайба</td><td>1 шт</td></tr>
-<tr><td>32 к.шайба</td><td>1 шт</td></tr>
-<tr><td>35 к.шайба</td><td>1 шт</td></tr>
-<tr><td>39 к.шайба</td><td>2 шт</td></tr>
-<tr><td>40 к.шайба</td><td>1 шт</td></tr>
-<tr><td>45 к.шайба</td><td>1 шт</td></tr>
-<tr><td>47 к.шайба</td><td>1 шт</td></tr>
-<tr><td>48 к.шайба</td><td>2 шт</td></tr>
-<tr><td>54 к.шайба</td><td>2 шт</td></tr>
-<tr><td>55 к.шайба</td><td>1 шт</td></tr>
-<tr><td>61 к.шайба</td><td>1 шт</td></tr>
-<tr><td>7 к.шайба</td><td>1 шт</td></tr>
+<tr><td>00 к.шайба</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>01 к.шайба</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>10 к.шайба*</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>11 к.шайба Zex</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>16 к.шайба</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>26 к.шайба</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>32 к.шайба</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>35 к.шайба</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>39 к.шайба</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>40 к.шайба</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>45 к.шайба</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>47 к.шайба</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>48 к.шайба</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>54 к.шайба</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>55 к.шайба</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>61 к.шайба</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>7 к.шайба</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
       </tbody>
     </table>
   </div>
@@ -153,15 +155,15 @@
   <div class="panel-title">Подкачки</div>
   <div class="sklad-table-wrap">
     <table class="sklad-table">
-      <thead><tr><th>Наименование</th><th>Кол-во</th></tr></thead>
+      <thead><tr><th class="th-name">Наименование</th><th colspan="2">Количество</th></tr></thead>
       <tbody>
-<tr><td>Крышка ротора</td><td>4 шт</td></tr>
-<tr><td>Подкачка 17мм</td><td>1 шт</td></tr>
-<tr><td>Подкачка 20мм</td><td>3 шт<span class="hidden-col">+1</span></td></tr>
-<tr><td>Подкачка 20мм Bosch</td><td>1 шт</td></tr>
-<tr><td>Подкачка V4</td><td>1 шт</td></tr>
-<tr><td>Шайба скольжения</td><td>1 шт</td></tr>
-<tr><td>Шайба скольжения</td><td>4 шт</td></tr>
+<tr><td>Крышка ротора</td><td class="qty-main">4 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>Подкачка 17мм</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>Подкачка 20мм</td><td class="qty-main">3 шт</td><td class="qty-hidden">+1</td></tr>
+<tr><td>Подкачка 20мм Bosch</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>Подкачка V4</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>Шайба скольжения</td><td class="qty-main">1 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>Шайба скольжения</td><td class="qty-main">4 шт</td><td class="qty-hidden"></td></tr>
       </tbody>
     </table>
   </div>
@@ -170,28 +172,28 @@
   <div class="panel-title">Распылители</div>
   <div class="sklad-table-wrap">
     <table class="sklad-table">
-      <thead><tr><th>Наименование</th><th>Кол-во</th></tr></thead>
+      <thead><tr><th class="th-name">Наименование</th><th colspan="2">Количество</th></tr></thead>
       <tbody>
-<tr><td>112 распылители D</td><td>8 шт</td></tr>
-<tr><td>113 распылители D</td><td>12 шт</td></tr>
-<tr><td>121 распылители D</td><td>4 шт</td></tr>
-<tr><td>121 распылитель</td><td>4 шт</td></tr>
-<tr><td>129 распылитель</td><td>8 шт</td></tr>
-<tr><td>130 распылитель</td><td>4 шт</td></tr>
-<tr><td>135 распылители</td><td>8 шт</td></tr>
-<tr><td>32 распылитель</td><td>8 шт</td></tr>
-<tr><td>59 распылители</td><td>4 шт</td></tr>
-<tr><td>619 распылитель</td><td>8 шт<span class="hidden-col">+12</span></td></tr>
-<tr><td>639 распылители</td><td>6 шт</td></tr>
-<tr><td>681 распылители</td><td>4 шт</td></tr>
-<tr><td>684 распылители</td><td>6 шт</td></tr>
-<tr><td>684 распылители</td><td>6 шт</td></tr>
-<tr><td>704 распылители</td><td>4 шт</td></tr>
-<tr><td>715 распылители</td><td>4 шт</td></tr>
-<tr><td>724 распылители</td><td>6 шт</td></tr>
-<tr><td>77 распылители</td><td>6 шт</td></tr>
-<tr><td>77 распылители</td><td>6 шт</td></tr>
-<tr><td>789 распылители</td><td>2 шт</td></tr>
+<tr><td>112 распылители D</td><td class="qty-main">8 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>113 распылители D</td><td class="qty-main">12 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>121 распылители D</td><td class="qty-main">4 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>121 распылитель</td><td class="qty-main">4 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>129 распылитель</td><td class="qty-main">8 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>130 распылитель</td><td class="qty-main">4 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>135 распылители</td><td class="qty-main">8 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>32 распылитель</td><td class="qty-main">8 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>59 распылители</td><td class="qty-main">4 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>619 распылитель</td><td class="qty-main">8 шт</td><td class="qty-hidden">+12</td></tr>
+<tr><td>639 распылители</td><td class="qty-main">6 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>681 распылители</td><td class="qty-main">4 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>684 распылители</td><td class="qty-main">6 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>684 распылители</td><td class="qty-main">6 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>704 распылители</td><td class="qty-main">4 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>715 распылители</td><td class="qty-main">4 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>724 распылители</td><td class="qty-main">6 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>77 распылители</td><td class="qty-main">6 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>77 распылители</td><td class="qty-main">6 шт</td><td class="qty-hidden"></td></tr>
+<tr><td>789 распылители</td><td class="qty-main">2 шт</td><td class="qty-hidden"></td></tr>
       </tbody>
     </table>
   </div>
